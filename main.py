@@ -90,7 +90,7 @@ def weather():
     else:
         speak("Não foi possível obter os dados de tempo.")
 
-def main():
+def talk():
     speak("Olá, Eu sou o UIQUI, seu assistente pessoal. Em que posso ajudar?")
     while True:
         query = recognize_speech().lower()
@@ -107,10 +107,21 @@ def main():
         elif "previsão do tempo" in query:
             weather()
 
-        elif "pare" in query or "sair" or "cancelar" in query:
+        elif "pare" in query or "sair" in query or "cancelar" in query:
             speak("Até logo.")
-            break
+            main()
         else:
             speak("Desculpe, não entendi. Poderia repetir?")
 
+def main():
+    while True:
+        query = recognize_speech().lower()
+        if "wiki" in query or "boa tarde wiki" in query or "bom dia wiki" in query or "boa noite wiki" in query or "Olá wiki" in query:
+            if "boa tarde" in query:
+                speak("boa tarde")
+            if "boa noite" in query:
+                speak("boa noite")
+            if "bom dia" in query:
+                speak("bom dia")
+            talk()
 main()
