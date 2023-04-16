@@ -1,11 +1,15 @@
-from senha import API_KEY
-from senha import API_KEY_TEMP
 import datetime
+import os
 import requests
 import json
 import speech_recognition as sr
 import pyttsx3
 import webbrowser
+from dotenv import load_dotenv
+
+load_dotenv()
+API_KEY = os.getenv('API_KEY')
+API_KEY_TEMP = os.getenv('API_KEY_TEMP')
 
 def speak(text):
     engine = pyttsx3.init()
@@ -58,7 +62,7 @@ def chat_gpt():
     frase = recognize_speech()
     headers = {"Authorization": f"Bearer {API_KEY}", "Content-type": "application/json"}
     link = "https://api.openai.com/v1/chat/completions"
-    id_modelo = "gpt-3.5-turbo"
+    id_modelo = "gpt-3.5-turbo-0301"
 
     body_message = {
             "model": id_modelo,
@@ -74,7 +78,6 @@ def chat_gpt():
     speak(mensagem)
     with open('mensagem.txt', 'a') as f:
         f.write(f"{mensagem}")
-
 def weather():
     speak("Qual cidade você gostaria de saber o tempo?")
     query = recognize_speech()
